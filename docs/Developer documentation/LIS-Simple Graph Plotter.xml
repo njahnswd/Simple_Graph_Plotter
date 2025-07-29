@@ -1,0 +1,531 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LIS-Simple Graph Plotter</name>
+    </assembly>
+    <members>
+        <member name="T:LIS_Simple_Graph_Plotter.Model.FunctionTypes">
+            <summary>
+            List of all available plotting functions
+            Future functions are to be added here
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.Model.FunctionTypes.Sin">
+            <summary>
+            Sine function (y = a*sin(x))
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.Model.FunctionTypes.Cos">
+            <summary>
+            Cosine function (y = a*cos(x))
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.Model.FunctionTypes.Sinc">
+            <summary>
+            Distribution function (y= a*sin(x)/x)
+            </summary>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.Model.PlotConfiguration">
+            <summary>
+            Model containing all relevant plot parameters
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.Model.PlotConfiguration.PlotParameterSets">
+            <summary>
+            Hierarchy of settings with its corresponding parameters
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.Model.PlotConfiguration.SelectedFunction">
+            <summary>
+            Mathematical function type that was selected previously (e.g. Sine, Cosine)
+            </summary>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.Model.FunctionParameters">
+            <summary>
+            Container of configurable parameters used for plotting mathematical functions
+            Includes amplitude, frequency, phase shift, and the visible x-axis range
+            </summary>
+        </member>
+        <member name="E:LIS_Simple_Graph_Plotter.Model.FunctionParameters.PropertyChanged">
+            <inheritdoc/>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.Model.FunctionParameters._amplitude">
+            <summary>
+            Value of the <see cref="P:LIS_Simple_Graph_Plotter.Model.FunctionParameters.Amplitude"/> property
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.Model.FunctionParameters._frequency">
+            <summary>
+            Value of the <see cref="P:LIS_Simple_Graph_Plotter.Model.FunctionParameters.Frequency"/> property
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.Model.FunctionParameters._phase">
+            <summary>
+            Value of the <see cref="P:LIS_Simple_Graph_Plotter.Model.FunctionParameters.Phase"/> property
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.Model.FunctionParameters._xMin">
+            <summary>
+            Value of the <see cref="P:LIS_Simple_Graph_Plotter.Model.FunctionParameters.XMin"/> property
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.Model.FunctionParameters._xMax">
+            <summary>
+            Value of the <see cref="P:LIS_Simple_Graph_Plotter.Model.FunctionParameters.XMax"/> property
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.Model.FunctionParameters.Amplitude">
+            <summary>
+            Get or set the amplitude of the function
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.Model.FunctionParameters.Frequency">
+            <summary>
+            Get or set the frequency of the function
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.Model.FunctionParameters.Phase">
+            <summary>
+            Get or set the phase of the function. To be set in radians
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.Model.FunctionParameters.XMin">
+            <summary>
+            Get or set the minimum value of the x-axis in the plot
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.Model.FunctionParameters.XMax">
+            <summary>
+            Get or set the maximum value of the x-axis in the plot
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Model.FunctionParameters.OnPropertyChanged(System.String)">
+            <summary>
+            Event raised when properties change <see cref="E:LIS_Simple_Graph_Plotter.Model.FunctionParameters.PropertyChanged"/>
+            </summary>
+            <param name="PropertyName">In: The name of the property that changed</param>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Model.FunctionParameters.Clone">
+            <summary>
+            Create a copy of all parameters to be used independently
+            </summary>
+            <returns>Deep copy of functionparameters</returns>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.Service.ConfigurationManager">
+            <summary>
+            Handler for saving and storing plot configurations using a local JSon file  
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.Service.ConfigurationManager._graphConfigs">
+            <summary>
+            Container for the settings of all graphs. Is only updated during the save interactions
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Service.ConfigurationManager.GetDefaultGraphConfiguration">
+            <summary>
+            Generate default settings for all graphs in case json file is missing
+            </summary>
+            <returns>Full configuration with default values</returns>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Service.ConfigurationManager.GetDefaultFunction">
+            <summary>
+            Generate default settings for a single function (e.g. Sine)
+            </summary>
+            <returns>New default set of <see cref="T:LIS_Simple_Graph_Plotter.Model.FunctionParameters"/></returns>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Service.ConfigurationManager.LoadPlotConfigurationToFile(System.String)">
+            <summary>
+            Load all configurations for each plottable function (e.g. Sine) from local Json file
+            </summary>
+            <param name="configPath">In: Path to Json file containing configurations</param>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Service.ConfigurationManager.SavePlotConfigurationToFile(System.String)">
+            <summary>
+            Save all configurations for each plottable function (e.g. Sine) from local Json file
+            </summary>
+            <param name="configPath">In: Path to Json file containing configurations</param>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Service.ConfigurationManager.GetPlotConfiguration">
+            <summary>
+            Get a copy of the configuration for the selected function type
+            </summary>
+            <returns>Current function parameter values</returns>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Service.ConfigurationManager.SetPlotConfiguration(LIS_Simple_Graph_Plotter.Model.FunctionParameters)">
+            <summary>
+            Set the configuration for the selected function type
+            </summary>
+            <param name="updatedParameters">In: New function parameters to be used as default</param>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Service.ConfigurationManager.GetSelectedFunction">
+            <summary>
+            Get a the current selected function type
+            </summary>
+            <returns>Selected function (e.g. Sine)</returns>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Service.ConfigurationManager.SetSelectedFunction(LIS_Simple_Graph_Plotter.Model.FunctionTypes)">
+             <summary>
+             Set a the selected mathematical function
+             </summary>
+            <param name="selectedFunction">In: Next function to plot</param>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.Services.IFunctionGenerator">
+            <summary>
+            General interface for all data point generators for each mathematical function
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Services.IFunctionGenerator.GenerateGraph(LIS_Simple_Graph_Plotter.Model.FunctionParameters,System.Int32)">
+            <summary>
+            Generates the points for the corresponding mathematical function to be displayed as a graph (sin, cos sinc)
+            </summary>
+            <param name="parameters">In: Parameterset that characterizes the graph (e.g. frequency)</param>
+            <param name="resolution">In: The number of data points to generate for the graph (x-axis)</param>
+            <returns>Collection of <see cref="T:System.Windows.Point"/> instances representing the mathematical function</returns>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.Services.SincFunctionGenerator">
+            <summary>
+            Generator of the points to be displayed on graph for sine function
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Services.SincFunctionGenerator.GenerateGraph(LIS_Simple_Graph_Plotter.Model.FunctionParameters,System.Int32)">
+            <summary>
+            Generates the points for the sinc function
+            </summary>
+            <param name="parameters">In: Parameterset that characterizes the graph (e.g. frequency)</param>
+            <param name="resolution">In: The number of data points to generate for the graph (x-axis)</param>
+            <returns>Collection of <see cref="T:System.Windows.Point"/> instances representing the sine function</returns>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.Services.SinFunctionGenerator">
+            <summary>
+            Generator of the points to be displayed on graph for sine function
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Services.SinFunctionGenerator.GenerateGraph(LIS_Simple_Graph_Plotter.Model.FunctionParameters,System.Int32)">
+            <summary>
+            Generates the points for the sine function
+            </summary>
+            <param name="parameters">In: Parameterset that characterizes the graph (e.g. frequency)</param>
+            <param name="resolution">In: The number of data points to generate for the graph (x-axis)</param>
+            <returns>Collection of <see cref="T:System.Windows.Point"/> instances representing the sine function</returns>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.Services.CosFunctionGenerator">
+            <summary>
+            Generator of the points to be displayed on graph for cosine function
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.Services.CosFunctionGenerator.GenerateGraph(LIS_Simple_Graph_Plotter.Model.FunctionParameters,System.Int32)">
+            <summary>
+            Generates the points for the cosine function
+            </summary>
+            <param name="parameters">In: Parameterset that characterizes the graph (e.g. frequency)</param>
+            <param name="resolution">In: The number of data points to generate for the graph (x-axis)</param>
+            <returns>Collection of <see cref="T:System.Windows.Point"/> instances representing the cosine function</returns>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel">
+            <summary>
+            ViewModel for plotting mathematical functions using OxyPlot
+            Generating and updates the function plot
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.JsonFilePath">
+            <summary>
+            Relative path to the settings file containing plot parameters 
+            </summary>
+        </member>
+        <member name="E:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.PropertyChanged">
+            <inheritdoc/>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.PlotModel">
+            <summary>
+            Defines the content and structure of the plot
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.PlotController">
+            <summary>
+            Handles plot interactions (updating values and ranges)
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel._configurationManager">
+            <summary>
+            Handles loading and write the graph configurations like amplitude etc
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.#ctor">
+            <summary>
+            Constructor of the PlotViewModel class
+            Initializes the plot model, controller and default function parameters and property updating
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel._selectedFunction">
+            <summary>
+            Value of the <see cref="P:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.SelectedFunction"/> property. Defaulting to a not achievable value
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.SelectedFunction">
+            <summary>
+            Gets or sets the currently selected function type (sine, cosine, sinc) and regenerates the plot if altered
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel._currentParameters">
+            <summary>
+            Value of the <see cref="P:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.CurrentParameters"/> property
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.CurrentParameters">
+            <summary>
+            Container with all current settings. Is initialized with default values
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.GeneratePlot">
+            <summary>
+            Generates the graph for the selected function using the given parameters by updating the plot model
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.SavePlotToSVG(System.String)">
+            <summary>
+            Save the entire plot including the axis to vector format image (.svg)
+            </summary>
+            <param name="filePath">In: Path to store image</param>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.AvailableFunctions">
+            <summary>
+            Provides a collection of available mathematical functions that can be selected in UI via Data Binding
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.InitializeConfiguration">
+            <summary>
+            Load plot configurations from local file (Json)
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.SaveConfiguration">
+            <summary>
+            Save the parameters and the selected function to JSON file
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.ValidateCurrentParameters(System.String@)">
+            <summary>
+            Check if all functionparameters are valid
+            </summary>
+            <param name="errorMessage">Out: Error string in case not all parameters are valid</param>
+            <returns>True when all parameters are valid</returns>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.OnPropertyChanged(System.String)">
+            <summary>
+            Event raised when properties change <see cref="E:LIS_Simple_Graph_Plotter.ViewModel.PlotViewModel.PropertyChanged"/>
+            </summary>
+            <param name="propertyName">In: The name of the property that changed</param>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.View.ParameterSlider">
+            <summary>
+            Interaktionslogik für ParameterSlider.xaml
+            </summary>
+            <summary>
+            ParameterSlider
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.View.ParameterSlider.#ctor">
+            <summary>
+            Constructor of the ParameterSlider user control
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.View.ParameterSlider.LabelProperty">
+            <summary>
+            Register tick frequency as available property
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.View.ParameterSlider.ValueProperty">
+            <summary>
+            Register tick frequency as available property. This parameter can only be set within the range of the minimum and maximum
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.View.ParameterSlider.MinimumProperty">
+            <summary>
+            Register tick frequency as available property
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.View.ParameterSlider.MaximumProperty">
+            <summary>
+            Register tick frequency as available property
+            </summary>
+        </member>
+        <member name="F:LIS_Simple_Graph_Plotter.View.ParameterSlider.TickFrequencyProperty">
+            <summary>
+            Register tick frequency as available property
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.View.ParameterSlider.CheckValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Check input value for user element whether its between minimum and maximum
+            </summary>
+            <param name="dependencyObj">In: ParameterSlider as sender</param>
+            <param name="baseValue">In: Value that needs to be checked</param>
+            <returns>Checked value</returns>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.View.ParameterSlider.Label">
+            <summary>
+            Header of the Slider and name of the parameter that is influenced
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.View.ParameterSlider.Value">
+            <summary>
+            Current value and position of slider
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.View.ParameterSlider.Minimum">
+            <summary>
+            Minimum value allowed on Slider
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.View.ParameterSlider.Maximum">
+            <summary>
+            Minimum value allowed on Slider
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.View.ParameterSlider.TickFrequency">
+            <summary>
+            Slider scaling set via ticks
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.View.ParameterSlider.TextBox_PreviewTextInput(System.Object,System.Windows.Input.TextCompositionEventArgs)">
+            <summary>
+            Check if the user input is numeric and valid
+            </summary>
+            <param name="sender">In: Textbox as sender</param>
+            <param name="e">In: Text changed arguments</param>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.View.ParameterSlider.NumericOnly_Pasting(System.Object,System.Windows.DataObjectPastingEventArgs)">
+            <summary>
+            Check if copied content is numeric and valid
+            </summary>
+            <param name="sender">In: Textbox as sender</param>
+            <param name="e">In: Text changed arguments</param>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.View.ParameterSlider.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.App">
+            <summary>
+            Interaktionslogik für "App.xaml"
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:LIS_Simple_Graph_Plotter.MainWindow">
+            <summary>
+            Contains the interaction logic for the main window of the application
+            Includes initialization, loading and user interactions for the main program
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="P:LIS_Simple_Graph_Plotter.MainWindow.ViewModel">
+            <summary>
+            Main view model managing plot and interaction logic
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.MainWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:LIS_Simple_Graph_Plotter.MainWindow"/> class.
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.MainWindow.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Handles the <c>Loaded</c> event of the main window
+            Initializes the view model and loads recent plot settings
+            </summary>
+            <param name="sender">In: Mainwindow as sender</param>
+            <param name="e">In: The event data associated with the <c>Loaded</c> event</param>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.MainWindow.SavePlotToSVGButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Save graph and all axis information to vector graphic
+            </summary>
+            <param name="sender">In: SavePlotToSVGButton as sender</param>
+            <param name="e">In: Clicked event arguments</param>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.MainWindow.SaveSVGMenuItem_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Save graph and all axis information to vector graphic via context menu
+            </summary>
+            <param name="sender">In: SaveSVGMenuItem as sender</param>
+            <param name="e">In: Clicked event arguments</param>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.MainWindow.SavePlotToSVG">
+            <summary>
+            Open a safe file dialog and export the plot to an svg to store it in the selected location
+            </summary>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.MainWindow.SavePlotConfigurationButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Save configuration of selected graph to file
+            </summary>
+            <param name="sender">In: SavePlotConfigurationButton as sender</param>
+            <param name="e">In: Clicked event arguments</param>
+        </member>
+        <member name="M:LIS_Simple_Graph_Plotter.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Simple_Graph_Calculator_And_Plotter.Properties.Resources">
+            <summary>
+              Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+            </summary>
+        </member>
+        <member name="P:Simple_Graph_Calculator_And_Plotter.Properties.Resources.ResourceManager">
+            <summary>
+              Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+            </summary>
+        </member>
+        <member name="P:Simple_Graph_Calculator_And_Plotter.Properties.Resources.Culture">
+            <summary>
+              Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+              Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

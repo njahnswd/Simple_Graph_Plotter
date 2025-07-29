@@ -1,0 +1,70 @@
+﻿<Window x:Class="LIS_Simple_Graph_Plotter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LIS_Simple_Graph_Plotter"
+        xmlns:customControls="clr-namespace:LIS_Simple_Graph_Plotter.View"
+        xmlns:oxyPlot="http://oxyplot.org/wpf"
+        mc:Ignorable="d"
+        Title="LIS-Simple Graph Plotter" Height="1080" Width="1920" WindowState="Maximized" Loaded="Window_Loaded" Icon="\Resources\lis_spg.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="PlottingGrid"/>
+        <Border Background="Black" Grid.Column="1"/>
+        <Grid x:Name="SettingsGrid">
+            <oxyPlot:PlotView x:Name="MainPlot" Model="{Binding PlotModel}" Controller="{Binding PlotController}">
+                <oxyPlot:PlotView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="SaveSVGMenuItem" Header="Save as SVG" Click="SaveSVGMenuItem_Click"/>
+                    </ContextMenu>
+                </oxyPlot:PlotView.ContextMenu>
+            </oxyPlot:PlotView>
+        </Grid>
+        <Grid x:Name="UserGrid" Grid.Column="2">
+            <StackPanel Margin="10">
+                <TextBlock Text="Function Selection" Margin="0,0,0,4" Style="{StaticResource HeaderText}"/>
+                <TextBlock Text="Pick a function to plot:" FontSize="15" FontFamily="Verdana" Margin="0,10,0,10"/>
+                <ComboBox ItemsSource="{Binding AvailableFunctions}" SelectedItem="{Binding SelectedFunction}" Padding="6" FontSize="15"
+                    BorderBrush="SlateGray" BorderThickness="2" VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch" MinWidth="200" Margin="0,0,0,10"/>
+                <GroupBox Header="Function Parameters" FontFamily="Verdana" FontSize="15" Margin="5">
+                    <StackPanel>
+                        <customControls:ParameterSlider Label="Amplitude" Value="{Binding CurrentParameters.Amplitude, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="10" TickFrequency="0.1"/>
+                        <customControls:ParameterSlider Label="Frequency" Value="{Binding CurrentParameters.Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="10" TickFrequency="0.1"/>
+                        <customControls:ParameterSlider Label="Phase" Value="{Binding CurrentParameters.Phase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="10" TickFrequency="0.1"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Axis Settings" FontFamily="Verdana" FontSize="15">
+                    <StackPanel>
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Minimum X value:" Style="{StaticResource ParameterDescriptions}" Grid.Column="0" VerticalAlignment="Center"/>
+                            <TextBox x:Name="XMinInput" Text="{Binding CurrentParameters.XMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Style="{StaticResource ParameterInputs}" Margin="5" VerticalAlignment="Center"/>
+                            <TextBlock Text="Maximum X value:" Style="{StaticResource ParameterDescriptions}" Grid.Column="3" VerticalAlignment="Center"/>
+                            <TextBox x:Name="XMaxInput" Text="{Binding CurrentParameters.XMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="4" Style="{StaticResource ParameterInputs}" Margin="5" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="SavePlotConfigurationButton" Content="Save Configuration" Click="SavePlotConfigurationButton_Click" Style="{StaticResource RoundedGrayButtonStyle}" Margin="10"/>
+                    <Button x:Name="SavePlotToSVGButton" Content="Export Graph to Image" Grid.Column="1" Click="SavePlotToSVGButton_Click" Style="{StaticResource RoundedGrayButtonStyle}" Margin="10"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

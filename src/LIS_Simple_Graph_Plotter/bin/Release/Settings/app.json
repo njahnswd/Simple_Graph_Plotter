@@ -1,0 +1,26 @@
+{
+  "PlotParameterSets": {
+    "Sin": {
+      "Amplitude": 1,
+      "Frequency": 1,
+      "Phase": 0,
+      "XMin": -1,
+      "XMax": 1
+    },
+    "Cos": {
+      "Amplitude": 1,
+      "Frequency": 1,
+      "Phase": 0,
+      "XMin": -1,
+      "XMax": 1
+    },
+    "Sinc": {
+      "Amplitude": 1,
+      "Frequency": 1,
+      "Phase": 0,
+      "XMin": -2,
+      "XMax": 2
+    }
+  },
+  "SelectedFunction": 2
+}
